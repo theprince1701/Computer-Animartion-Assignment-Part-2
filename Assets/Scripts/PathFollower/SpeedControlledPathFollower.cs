@@ -83,15 +83,11 @@ public class SpeedControlledPathFollower : MonoBehaviour
 
     private void Update()
     {
-        float dist = (transform.position - _owner.transform.position).magnitude;
-        
-        if (dist >= 10.0f)
-            return;
-        
         _distance += speed * Time.deltaTime;
 
         int sampleCount = table[_currentIndex].Count;
-        while (_distance > table[_currentIndex][_currentSample + 1].accumulatedDistance)
+        
+        if (_distance > table[_currentIndex][_currentSample + 1].accumulatedDistance)
         {
             _currentSample++;
 

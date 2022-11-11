@@ -6,12 +6,10 @@ public class EvadeOilSpills : SteeringBehaviourBase, IEvade
 {
     [SerializeField] private float evadeSpeed;
 
-
     public override void OnObjectDetected(Powerup powerup)
     {
         if (powerup.CollisionType != CollisionTypes.OilSpill)
             return;
-        
         
         EvadeTarget(powerup.transform);
     }

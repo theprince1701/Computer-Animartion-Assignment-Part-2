@@ -9,7 +9,6 @@ public enum LookTypes
     Both
 }
 
-
 public class SteeringBehaviourBase : MonoBehaviour
 {
     [SerializeField, Range(0, 1)] protected float weight;

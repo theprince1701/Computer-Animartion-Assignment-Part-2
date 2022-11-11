@@ -21,7 +21,6 @@ public class SeekPath : SteeringBehaviourBase, ISeeker
     private void Update()
     {
         SeekTarget(_target);
-
     }
 
     public void SeekTarget(Transform target)
@@ -30,10 +29,7 @@ public class SeekPath : SteeringBehaviourBase, ISeeker
         Vector3 currentVelocity = Owner.Rigidbody.velocity;
         Vector3 desiredVelocity = targetDirection * seekSpeed - currentVelocity;
 
-
         Force = desiredVelocity * weight * Owner.speedBoost;
-        
         transform.rotation = Quaternion.LookRotation(targetDirection);
-
     }
 }

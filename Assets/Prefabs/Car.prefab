@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b385cee6aff74418bfdee0eca23b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateType: 1
+  updateType: 0
   onObstacleDetected:
     m_PersistentCalls:
       m_Calls: []
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  seekSpeed: 50
+  seekSpeed: 35
 --- !u!114 &1077967031737130129
 MonoBehaviour:
   m_ObjectHideFlags: 0
