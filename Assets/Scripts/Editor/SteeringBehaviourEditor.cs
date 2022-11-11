@@ -8,10 +8,11 @@ using UnityEditor;
 [CustomEditor(typeof(SteeringBehaviour))]
 public class SteeringBehaviourEditor : Editor
 {
-    private readonly GUIContent _addSeekLabel = new GUIContent("Add Seek");
-    private readonly GUIContent _addFleeLabel = new GUIContent("Add Flee");
-    private readonly GUIContent _addEvadeLabel = new GUIContent("Add Evade");
-    private readonly GUIContent _addPursueLabel = new GUIContent("Add Pursue");
+    private readonly GUIContent _addSeekLabel = new GUIContent("Add Seek Component");
+    private readonly GUIContent _addFleeLabel = new GUIContent("Add Flee Component");
+    private readonly GUIContent _addEvadeLabel = new GUIContent("Add Evade Component");
+    private readonly GUIContent _addPursueLabel = new GUIContent("Add Pursue Component");
+    private readonly GUIContent _addArriveLabel = new GUIContent("Add Arrive Component");
 
 
 
@@ -32,6 +33,8 @@ public class SteeringBehaviourEditor : Editor
         ShowModuleDetails(typeof(IEvade), _addEvadeLabel);
         EditorGUILayout.Space();
         ShowModuleDetails(typeof(IPursue), _addPursueLabel);
+        EditorGUILayout.Space();
+        ShowModuleDetails(typeof(IArrival), _addArriveLabel);
         EditorGUILayout.Space();
     }
     

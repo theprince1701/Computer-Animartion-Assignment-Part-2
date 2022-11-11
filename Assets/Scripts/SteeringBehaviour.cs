@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public enum PhysicsUpdateTypes
 {
@@ -13,20 +15,23 @@ public class SteeringBehaviour : MonoBehaviour
 {
     public PhysicsUpdateTypes updateType;
     
-    public Rigidbody Rigidbody { get; private set; }
-    
     private SteeringBehaviourBase[] _modules;
-
-    private float _speedBoost = 1.0f;
     
+    public float speedBoost { get; private set; }
+    public Rigidbody Rigidbody { get; private set; }
+
+    public UnityEvent<Powerup> onObstacleDetected;
+
     private void Awake()
     {
+        speedBoost = 1f;
         Rigidbody = GetComponent<Rigidbody>();
         _modules = GetComponents<SteeringBehaviourBase>();
 
         for (int i = 0; i < _modules.Length; i++)
         {
             _modules[i].Init(this);
+            onObstacleDetected.AddListener(_modules[i].OnObjectDetected);
         }
     }
 
@@ -37,9 +42,9 @@ public class SteeringBehaviour : MonoBehaviour
             UpdatePhysics();
         }
 
-        if (_speedBoost > 1.0f)
+        if (speedBoost > 1.0f)
         {
-            _speedBoost -= Time.deltaTime;
+            speedBoost -= Time.deltaTime;
         }
     }
 
@@ -68,7 +73,7 @@ public class SteeringBehaviour : MonoBehaviour
             force += module.Force;
         }
         
-        Rigidbody.AddForce(force * _speedBoost);
+        Rigidbody.AddForce(force);
     }
 
     public void Spin(float spinForce)
@@ -80,7 +85,6 @@ public class SteeringBehaviour : MonoBehaviour
 
     public void SpeedBoost(float speedBoost)
     {
-        Debug.Log(speedBoost);
-        _speedBoost = speedBoost;
+        this.speedBoost = speedBoost;
     }
 }

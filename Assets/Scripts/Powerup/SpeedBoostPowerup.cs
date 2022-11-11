@@ -8,6 +8,7 @@ public class SpeedBoostPowerup : Powerup
     
     protected override void OnHit(SteeringBehaviour car)
     {
-        car.SpeedBoost(speedBoost);
+  //      car.SpeedBoost(speedBoost);
+        PathPlacer.Instance.RemovePowerUp(this);
     }
 }

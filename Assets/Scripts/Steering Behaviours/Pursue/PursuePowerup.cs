@@ -2,16 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PursuePowerup : MonoBehaviour
+public class PursuePowerup : SteeringBehaviourBase, IPursue
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    public void PursueTarget(Transform target)
     {
         
     }

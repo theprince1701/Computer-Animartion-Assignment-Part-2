@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum LookTypes
+{
+    Raycast,
+    Distance,
+    Both
+}
+
+
 public class SteeringBehaviourBase : MonoBehaviour
 {
     [SerializeField, Range(0, 1)] protected float weight;
@@ -15,4 +23,6 @@ public class SteeringBehaviourBase : MonoBehaviour
     {
         Owner = owner;
     }
+    
+    public virtual void OnObjectDetected(Powerup powerup) {  }
 }

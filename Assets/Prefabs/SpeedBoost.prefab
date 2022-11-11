@@ -131,4 +131,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a138865060c274409e14a1f00f64463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedBoost: 100
+  collisionTypes: 0
+  speedBoost: 20

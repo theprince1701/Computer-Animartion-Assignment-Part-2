@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class PursuePath : SteeringBehaviourBase, IPursue
 {
-    [SerializeField] private float pathFollowerSpeed;
     [SerializeField] private float seekSpeed;
 
     private Transform _target;
 
     private void Start()
     {
-        PathFollower pathFollower = 
-            new GameObject(gameObject.name + "_PATH FOLLOWER").AddComponent<PathFollower>();
+        SpeedControlledPathFollower pathFollower = 
+            new GameObject(gameObject.name + "_PATH FOLLOWER").AddComponent<SpeedControlledPathFollower>();
 
-        pathFollower.Init(pathFollowerSpeed, Owner);
+        pathFollower.Init(Owner);
         _target = pathFollower.transform;
     }
 
@@ -31,8 +30,7 @@ public class PursuePath : SteeringBehaviourBase, IPursue
         Vector3 targetDirection = (target.position + velocity - transform.position).normalized;
         Vector3 currentVelocity = velocity;
         Vector3 desiredVelocity = targetDirection * seekSpeed - currentVelocity;
-
-
+        
         Force = desiredVelocity * weight;
     }
 }

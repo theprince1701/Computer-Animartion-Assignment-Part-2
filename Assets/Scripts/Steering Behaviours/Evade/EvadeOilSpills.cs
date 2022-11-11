@@ -5,29 +5,30 @@ using UnityEngine;
 public class EvadeOilSpills : SteeringBehaviourBase, IEvade
 {
     [SerializeField] private float evadeSpeed;
-    [SerializeField] private float evadeProximity;
-    [SerializeField] private float lookDist;
 
-    private void Update()
+
+    public override void OnObjectDetected(Powerup powerup)
     {
-        RaycastHit _hit;
-        if (Physics.Raycast(transform.position, transform.forward, out _hit, lookDist))
-        {
-            if (_hit.collider.TryGetComponent(out OilSpill oilSpill))
-            {
-                EvadeTarget(_hit.collider.transform);
-            }
-        }
+        if (powerup.CollisionType != CollisionTypes.OilSpill)
+            return;
+        
+        
+        EvadeTarget(powerup.transform);
     }
+
 
     public void EvadeTarget(Transform target)
     {
-        float t = 1.0f - Utility.Attenuate(target.position, Owner.Rigidbody.position, evadeProximity);
+        Vector2 dirBetweenPoints = (target.position - transform.position).normalized;
+        Vector3 dir = Vector2.Perpendicular(dirBetweenPoints);
+        Vector3 targetVelocity = (dir * evadeSpeed) + Owner.Rigidbody.velocity;
         
-        Vector3 targetDirection = (target.position + Owner.Rigidbody.velocity - transform.position).normalized;
-        Vector3 currentVelocity = Owner.Rigidbody.velocity;
-        Vector3 desiredVelocity = targetDirection * evadeSpeed - currentVelocity;
+        Force = targetVelocity * weight;
+        Invoke(nameof(ResetForce), 1.0f);
+    }
 
-        Force = Vector3.Lerp(currentVelocity, desiredVelocity, t);
+    private void ResetForce()
+    {
+        Force = Vector3.zero;
     }
 }

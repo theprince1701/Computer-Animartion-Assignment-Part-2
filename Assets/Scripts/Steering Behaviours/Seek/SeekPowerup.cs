@@ -1,26 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SeekPowerup : SteeringBehaviourBase, ISeeker
 {
-    [SerializeField] private float lookDist;
     [SerializeField] private float seekSpeed;
 
 
-    private void Update()
+    public override void OnObjectDetected(Powerup powerup)
     {
-        RaycastHit _hit;
-        if (Physics.Raycast(transform.position, transform.forward, out _hit, lookDist))
-        {
-            if (_hit.collider.TryGetComponent(out Powerup powerUp))
-            {
-                SeekTarget(_hit.collider.transform);
-            }
-        }
+        if (powerup.CollisionType != CollisionTypes.Powerup)
+            return;
+        
+        SeekTarget(powerup.transform);
     }
-
 
     public void SeekTarget(Transform target)
     {

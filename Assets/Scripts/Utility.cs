@@ -17,4 +17,9 @@ public class Utility : MonoBehaviour
     {
         return Mathf.Clamp01((target - current).magnitude / length);
     }
+    
+    public static Vector3 GetCurvePosition(Vector3 s, Vector3 e, Vector3 st, Vector3 et, float t)
+    {
+        return (((-s + 3*(st-et) + e)* t + (3*(s+et) - 6*st))* t + 3*(st-s))* t + s;
+    }
 }

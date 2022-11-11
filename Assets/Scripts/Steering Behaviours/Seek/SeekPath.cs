@@ -5,23 +5,23 @@ using UnityEngine;
 
 public class SeekPath : SteeringBehaviourBase, ISeeker
 {
-    [SerializeField] private float pathFollowerSpeed;
     [SerializeField] private float seekSpeed;
 
     private Transform _target;
 
     private void Start()
     {
-        PathFollower pathFollower = 
-            new GameObject(gameObject.name + "_PATH FOLLOWER").AddComponent<PathFollower>();
-
-        pathFollower.Init(pathFollowerSpeed, Owner);
+        SpeedControlledPathFollower pathFollower = 
+            new GameObject(gameObject.name + "_PATH FOLLOWER").AddComponent<SpeedControlledPathFollower>();
+        
+        pathFollower.Init(Owner);
         _target = pathFollower.transform;
     }
 
     private void Update()
     {
         SeekTarget(_target);
+
     }
 
     public void SeekTarget(Transform target)
@@ -31,7 +31,9 @@ public class SeekPath : SteeringBehaviourBase, ISeeker
         Vector3 desiredVelocity = targetDirection * seekSpeed - currentVelocity;
 
 
-        Force = desiredVelocity * weight;
-        // Owner.SetSteeringForce(desiredVelocity * weight);
+        Force = desiredVelocity * weight * Owner.speedBoost;
+        
+        transform.rotation = Quaternion.LookRotation(targetDirection);
+
     }
 }

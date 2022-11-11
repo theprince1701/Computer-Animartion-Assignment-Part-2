@@ -34,9 +34,6 @@ public class PathFollower : MonoBehaviour
     
     private void Update()
     {
-        float dist = Vector3.Distance(transform.position, _steeringBehaviour.transform.position);
-        
-        
         Vector2[] points = Path.GetPointsInSegment(_index);
 
         p1 = points[1];

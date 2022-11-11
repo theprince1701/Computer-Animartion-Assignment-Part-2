@@ -37,10 +37,10 @@ public class EvadeVehicles : SteeringBehaviourBase, IEvade
     public void EvadeTarget(Transform target)
     {
         float t = 1f - Utility.Attenuate(target.position, Owner.Rigidbody.position, proximity);
-        Vector3 targetDirection = (target.position - transform.position).normalized;
+        Vector3 targetDirection = ((target.position + target.GetComponent<Rigidbody>().velocity) - transform.position).normalized;
         Vector3 currentVelocity = -Owner.Rigidbody.velocity;
         Vector3 desiredVelocity = targetDirection * fleeSpeed - currentVelocity;
 
-        Force = Vector3.Lerp(-Owner.Rigidbody.velocity, -desiredVelocity, t) * weight;
+        Force = Vector3.Lerp(currentVelocity, -desiredVelocity, t) * weight;
     }
 }

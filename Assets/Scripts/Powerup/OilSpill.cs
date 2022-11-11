@@ -6,6 +6,6 @@ public class OilSpill : Powerup
 {
     protected override void OnHit(SteeringBehaviour car)
     {
-        
+        PathPlacer.Instance.RemovePowerUp(this);
     }
 }
