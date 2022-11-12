@@ -20,6 +20,7 @@ public class SteeringBehaviour : MonoBehaviour
     public Rigidbody Rigidbody { get; private set; }
 
     public UnityEvent<Powerup> onObstacleDetected;
+    public UnityEvent<Powerup> onObstacleStay;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class SteeringBehaviour : MonoBehaviour
         {
             _modules[i].Init(this);
             onObstacleDetected.AddListener(_modules[i].OnObjectDetected);
+            onObstacleStay.AddListener(_modules[i].OnObjectStay);
         }
     }
 
@@ -71,7 +73,7 @@ public class SteeringBehaviour : MonoBehaviour
         {
             force += module.Force;
         }
-        
+
         Rigidbody.AddForce(force);
     }
 

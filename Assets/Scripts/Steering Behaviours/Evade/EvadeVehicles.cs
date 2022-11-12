@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class EvadeVehicles : SteeringBehaviourBase, IEvade
             fleeTargets.Add(vehicles[i].transform);
         }
     }
-
+    
 
     private void Update()
     {
@@ -27,7 +28,7 @@ public class EvadeVehicles : SteeringBehaviourBase, IEvade
         {
             float dist = (fleeTargets[i].position - transform.position).magnitude;
 
-            if (dist <= fleeDistance)
+            if (dist <= fleeDistance && dist > 0)
             {
                 EvadeTarget(fleeTargets[i]);
             }
@@ -37,10 +38,11 @@ public class EvadeVehicles : SteeringBehaviourBase, IEvade
     public void EvadeTarget(Transform target)
     {
         float t = 1f - Utility.Attenuate(target.position, Owner.Rigidbody.position, proximity);
-        Vector3 targetDirection = ((target.position + target.GetComponent<Rigidbody>().velocity) - transform.position).normalized;
-        Vector3 currentVelocity = -Owner.Rigidbody.velocity;
-        Vector3 desiredVelocity = targetDirection * fleeSpeed - currentVelocity;
 
-        Force = Vector3.Lerp(currentVelocity, -desiredVelocity, t) * weight;
+        Vector3 a = -Owner.Rigidbody.velocity;
+        Vector3 b = -Utility.Seek(target.position, Owner.Rigidbody,
+            fleeSpeed);
+        
+        Force = Vector3.Lerp(a, b , t) * weight;
     }
 }

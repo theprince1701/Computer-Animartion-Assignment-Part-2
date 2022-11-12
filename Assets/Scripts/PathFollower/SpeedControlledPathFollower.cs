@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpeedControlledPathFollower : MonoBehaviour
 {
-    [SerializeField] private float speed = 17.5f;
+    [SerializeField] private float speed = 15.0f;
     [SerializeField] private float sampleRate = 16;
     
     private PathCreator _pathCreator;

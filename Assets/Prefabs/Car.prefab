@@ -15,9 +15,8 @@ GameObject:
   - component: {fileID: 1077967031737130126}
   - component: {fileID: 1077967031737130120}
   - component: {fileID: 1077967031737130135}
-  - component: {fileID: 1077967031737130129}
-  - component: {fileID: 1077967031737130131}
-  - component: {fileID: 1077967031737130130}
+  - component: {fileID: 2113703997}
+  - component: {fileID: 2113703998}
   m_Layer: 6
   m_Name: Car
   m_TagString: Car
@@ -136,6 +135,9 @@ MonoBehaviour:
   onObstacleDetected:
     m_PersistentCalls:
       m_Calls: []
+  onObstacleStay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1077967031737130135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,8 +151,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  seekSpeed: 35
---- !u!114 &1077967031737130129
+  seekSpeed: 16
+--- !u!114 &2113703997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077967031737130112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99732f4791c1044a91eb7d88363e5e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  evadeSpeed: 10
+  raycastLength: 0
+--- !u!114 &2113703998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,37 +180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  fleeSpeed: 50
+  fleeSpeed: 15
   fleeDistance: 2.5
   proximity: 10
---- !u!114 &1077967031737130131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077967031737130112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e99732f4791c1044a91eb7d88363e5e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weight: 0.5
-  evadeSpeed: 50
---- !u!114 &1077967031737130130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077967031737130112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c9513c0f985c1448a8fcd2dbff3b8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weight: 1
-  seekSpeed: 45
 --- !u!1 &6619576048886711110
 GameObject:
   m_ObjectHideFlags: 0

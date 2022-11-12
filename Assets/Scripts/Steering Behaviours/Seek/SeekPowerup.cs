@@ -18,7 +18,15 @@ public class SeekPowerup : SteeringBehaviourBase, ISeeker
         Vector3 targetDirection = (target.position - transform.position).normalized;
         Vector3 currentVelocity = Owner.Rigidbody.velocity;
         Vector3 desiredVelocity = targetDirection * seekSpeed - currentVelocity;
-        
-        Force = desiredVelocity * weight;
+
+        Force = desiredVelocity * weight * Owner.speedBoost;
+    }
+    
+        private void Update()
+    {
+        if (Force != Vector3.zero)
+        {
+            Force -= Force * Time.deltaTime;
+        }
     }
 }

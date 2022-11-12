@@ -20,11 +20,14 @@ public class FleeVehicles : SteeringBehaviourBase, IFlee
         {
             fleeTargets.Add(vehicles[i].transform);
         }
+        
+        Debug.Log(fleeTargets);
     }
 
 
     private void Update()
     {
+        Debug.Log(gameObject.name);
         for (int i = 0; i < fleeTargets.Count; i++)
         {
             float dist = (fleeTargets[i].position - transform.position).magnitude;
@@ -38,11 +41,12 @@ public class FleeVehicles : SteeringBehaviourBase, IFlee
 
     public void FleeTarget(Transform target)
     {
+        Debug.Log("gi");
         float t = Utility.Attenuate(target.position, Owner.Rigidbody.position, proximity);
         Vector3 targetDirection = (target.position - transform.position).normalized;
         Vector3 currentVelocity = -Owner.Rigidbody.velocity;
         Vector3 desiredVelocity = targetDirection * fleeSpeed - currentVelocity;
 
-        Force = Vector3.Lerp(-Owner.Rigidbody.velocity, -desiredVelocity, t) * weight;
+        Force = Vector3.Lerp(currentVelocity, -desiredVelocity, t) * weight;
     }
 }

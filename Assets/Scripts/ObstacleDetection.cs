@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ObstacleDetection : MonoBehaviour
@@ -9,6 +10,14 @@ public class ObstacleDetection : MonoBehaviour
         if (other.TryGetComponent(out Powerup powerup))
         {
             car.onObstacleDetected?.Invoke(powerup);
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.TryGetComponent(out Powerup powerup))
+        {
+            car.onObstacleStay?.Invoke(powerup);
         }
     }
 }
