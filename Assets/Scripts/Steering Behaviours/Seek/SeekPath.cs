@@ -20,7 +20,12 @@ public class SeekPath : SteeringBehaviourBase, ISeeker
 
     private void Update()
     {
-        SeekTarget(_target);
+        float dist = (_target.position - transform.position).magnitude;
+
+        if (dist >= 2.5f)
+        {
+            SeekTarget(_target);
+        }
     }
 
     public void SeekTarget(Transform target)

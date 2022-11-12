@@ -24,4 +24,6 @@ public class SteeringBehaviourBase : MonoBehaviour
     }
     
     public virtual void OnObjectDetected(Powerup powerup) {  }
+    public virtual void OnObjectStay(Powerup powerup) {  }
+
 }
